@@ -43,4 +43,25 @@ public:
         return new_length;
     }
 };
+
+#include <vector>
+
+class Solution { // 雙指針法
+public:
+    int removeDuplicates(std::vector<int>& nums) {
+        if (nums.empty()) return 0;
+
+        int k = 0;  // 慢指針
+
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] != nums[k]) {
+                k++;
+                nums[k] = nums[i];
+            }
+        }
+        
+        return k + 1;  // k 是索引，新長度是 k + 1
+    }
+};
+
 */
