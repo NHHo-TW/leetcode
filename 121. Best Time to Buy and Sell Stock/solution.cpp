@@ -1,6 +1,7 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
+        // 結果錯誤，未考慮最小值在最大收益之後出現
         int n = prices.size();
         int i , j = 0 , max_price , min_price = prices[0] , profit = 0;
         for (i = 0 ; i < n ; ++i){
