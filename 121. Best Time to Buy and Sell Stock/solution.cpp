@@ -1,24 +1,30 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        // 結果錯誤，未考慮最小值在最大收益之後出現
         int n = prices.size();
-        int i , j = 0 , max_price , min_price = prices[0] , profit = 0;
-        for (i = 0 ; i < n ; ++i){
-            if (prices[i] < min_price) {
-                min_price = prices[i];
+        int i , j = -1 , k , max_profit = 0 , profit = 0;
+        vector<int> temp(n - 1);
+        for (i = 0 ; i < n - 1 ; ++i){
+            temp[i] = prices[i + 1] - prices[i];
+            if ((j == -1) && (temp[i] >= 0)) {
                 j = i;
             }
         }
-        max_price = prices[j];
-        for (i = j + 1 ; i < n ; ++i){
-            cout << "max_price=" << max_price << endl ;
-            cout << "min_price=" << min_price << endl ;
-            cout << prices[i] << endl ;
-            if (prices[i] - min_price > profit) {
-                profit = prices[i] - min_price;
-            }
+
+        if (j == -1) {
+            j = 0;
         }
-        return profit;
+
+        for (i = j ; i < n - 1 ; ++i){
+            for (k = 0 + i ; k < n - 1 ; ++k){
+                profit = profit + temp[k];
+                if (profit > max_profit) {
+                    max_profit = profit;
+                }
+            }
+            profit = 0;
+        }
+
+        return max_profit;
     }
 };
