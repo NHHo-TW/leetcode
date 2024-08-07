@@ -1,3 +1,26 @@
+// V02 
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n = nums.size();
+        int i = 0 , last_pos = 0 , step = 0 , distance;
+        while (n > 1){
+            for (i = 0 ; i < n ; ++i){
+                distance = n - i - 1;
+                if (nums[i] >= distance){
+                    step++;
+                    last_pos = i;
+                    i = n;
+                }
+            }
+            n = last_pos + 1;
+        }
+        return step;
+    }
+};
+
+/*
+// V01
 class Solution {
 public:
     int jump(vector<int>& nums) {
@@ -23,3 +46,4 @@ public:
         return step;
     }
 };
+*/
